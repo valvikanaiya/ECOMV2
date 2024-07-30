@@ -1,0 +1,7 @@
+const baseUrl = import.meta.env.VITE_BASE_API_URL;
+
+export const api = {
+  products: `${baseUrl}/products`,
+  getCategory: `${baseUrl}/products/categories`,
+  getCartsItem: `${baseUrl}/carts`,
+};
