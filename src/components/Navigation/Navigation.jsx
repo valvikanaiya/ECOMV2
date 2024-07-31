@@ -1,43 +1,117 @@
-import { Box, Button, Typography } from "@mui/material";
+import {
+  AppBar,
+  Avatar,
+  Badge,
+  Box,
+  Menu,
+  MenuItem,
+  SwipeableDrawer,
+  Typography,
+} from "@mui/material";
 import { Link } from "react-router-dom";
+import {
+  SCLinkContainer,
+  SCToolBar,
+  SCUserContainer,
+} from "./Navigation.style";
+import MenuIcon from "@mui/icons-material/Menu";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import { stringAvatar } from "@utils/utils";
+import { useState } from "react";
 
-const NavLink = [{ path: "/cart", label: "Cart" }];
+
+
 const Navigation = () => {
+  const [anchorEl, setAnchorEl] = useState(null);
+  const [drawerOpen, setDrawerOpen] = useState(false);
+  const open = Boolean(anchorEl);
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const openDrawer = () => {
+    setDrawerOpen(true);
+  };
+  const closeDrawer = () => {
+    setDrawerOpen(false);
+  };
+
+
+  
   return (
-    <Box
-      component={"nav"}
-      bgcolor={"white"}
-      boxShadow={1}
-      px={4}
-      py={2}
-      sx={{
-        position: "sticky",
-        top: 0,
-        display: "flex",
-        justifyContent: "space-between",
-        zIndex: 999,
-      }}>
-      <Box component={Link} to="/" sx={{ textDecoration: "none" }}>
-        <Typography
-          variant="h4"
-          color={"primary"}
-          fontWeight={"bold"}
-          component="h2">
-          E-Com
-        </Typography>
-      </Box>
-      <Box>
-        {NavLink.map((link) => (
-          <Button
-            variant="text"
+    <>
+      <div>
+        <SwipeableDrawer open={drawerOpen} onClose={closeDrawer}>
+          {"rest"}
+        </SwipeableDrawer>
+      </div>
+      <AppBar position="sticky">
+        <SCToolBar>
+          <Box
             component={Link}
-            to={link.path}
-            key={link.label}>
-            {link.label}
-          </Button>
-        ))}
-      </Box>
-    </Box>
+            to="/"
+            sx={{
+              textDecoration: "none",
+              display: { xs: "none", sm: "block" },
+            }}>
+            <Typography
+              variant="h6"
+              sx={{
+                color: "white",
+                textDecoration: "none",
+              }}>
+              Ecom
+            </Typography>
+          </Box>
+          <MenuIcon
+            sx={{ display: { xs: "block", sm: "none" } }}
+            onClick={openDrawer}
+          />
+          <SCLinkContainer>
+            <Link to="/cart">
+              <Badge badgeContent={3} color="error">
+                <ShoppingCartIcon sx={{ color: "white" }} />
+              </Badge>
+            </Link>
+            <Avatar
+              sx={{ width: 30, height: 30 }}
+              {...stringAvatar("Jed Watson")}
+              onClick={handleClick}
+            />
+          </SCLinkContainer>
+          <SCUserContainer>
+            <Avatar
+              sx={{ width: 30, height: 30 }}
+              {...stringAvatar("Jed Watson")}
+              onClick={handleClick}
+            />
+            <Menu
+              id="demo-positioned-menu"
+              aria-labelledby="demo-positioned-button"
+              anchorEl={anchorEl}
+              open={open}
+              onClose={handleClose}
+              anchorOrigin={{
+                vertical: "bottom",
+                horizontal: "right",
+              }}
+              transformOrigin={{
+                vertical: "top",
+                horizontal: "center",
+              }}>
+              <MenuItem onClick={handleClose}>Profile</MenuItem>
+              <MenuItem onClick={handleClose}>My account</MenuItem>
+              <MenuItem onClick={handleClose}>Logout</MenuItem>
+            </Menu>
+          </SCUserContainer>
+        </SCToolBar>
+      </AppBar>
+    </>
   );
 };
 

@@ -97,9 +97,10 @@ const Products = () => {
               alignItems: "center",
               justifyContent: "space-between",
               top: "4rem",
+              gap: 1,
               p: 2,
             }}>
-            <Box sx={{ display: "flex", gap: 1 }}>
+            <Box sx={{ display: "flex", gap: 1, overflowY: "hidden", flex: 1 }}>
               {categoryList && categoryList.length > 0 && (
                 <>
                   <Chip
