@@ -15,6 +15,10 @@ export const useECommerce = () => {
     dispatch({ type: "ADD_TO_CART", payload: product });
   };
 
+  const changeQuantity = (id, quantity) => {
+    dispatch({ type: "CHANGE_QUANTITY", payload: { id, quantity } });
+  };
+
   const removeFromCart = (productId) => {
     dispatch({ type: "REMOVE_FROM_CART", payload: productId });
   };
@@ -32,6 +36,7 @@ export const useECommerce = () => {
     setUser,
     setProducts,
     addToCart,
+    changeQuantity,
     removeFromCart,
     clearCart,
     placeOrder,

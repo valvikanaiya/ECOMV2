@@ -13,7 +13,14 @@ import { Link } from "react-router-dom";
 const ProductCard = ({ product }) => {
   const { title, price, id, image } = product;
   return (
-    <Card variant="outlined">
+    <Card
+      variant="outlined"
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        justifyContent: "space-between",
+        height: "100%",
+      }}>
       <CardMedia
         component="img"
         height="140"

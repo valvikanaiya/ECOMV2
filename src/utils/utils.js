@@ -34,6 +34,8 @@ export const getCartSubtotal = (products) => {
     total += element.price * element.quantity;
     totalitem += element.quantity;
   });
-  console.log(total, totalitem, products);
+
   return { total, totalitem };
 };
+
+export const QuantityArray = Array.from({ length: 10 }, (_, i) => i + 1);

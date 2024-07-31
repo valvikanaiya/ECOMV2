@@ -26,18 +26,24 @@ import { useState } from "react";
 import { Home } from "@mui/icons-material";
 import { useECommerce } from "../../hooks/useECommerce";
 
-const MobileNavLink = [
-  { path: "/", icon: <Home />, label: "Home" },
-  { path: "/cart", icon: <ShoppingCartIcon />, label: "Cart" },
-];
-
 const Navigation = () => {
   const [anchorEl, setAnchorEl] = useState(null);
   const [drawerOpen, setDrawerOpen] = useState(false);
   const { state } = useECommerce();
-  const { user } = state;
+  const { user, cart } = state;
   const open = Boolean(anchorEl);
-
+  const MobileNavLink = [
+    { path: "/", icon: <Home />, label: "Home" },
+    {
+      path: "/cart",
+      icon: (
+        <Badge badgeContent={cart.length} color="error">
+          <ShoppingCartIcon />
+        </Badge>
+      ),
+      label: "Cart",
+    },
+  ];
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -81,29 +87,31 @@ const Navigation = () => {
       </div>
       <AppBar position="sticky">
         <SCToolBar>
-          <Box
-            component={Link}
-            to="/"
-            sx={{
-              textDecoration: "none",
-              display: { xs: "none", sm: "block" },
-            }}>
-            <Typography
-              variant="h6"
+          <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+            <MenuIcon
+              sx={{ display: { xs: "block", sm: "none" } }}
+              onClick={openDrawer}
+            />
+            <Box
+              component={Link}
+              to="/"
               sx={{
-                color: "white",
                 textDecoration: "none",
+                // display: { xs: "none", sm: "block" },
               }}>
-              Ecom
-            </Typography>
+              <Typography
+                variant="h6"
+                sx={{
+                  color: "white",
+                  textDecoration: "none",
+                }}>
+                Ecom
+              </Typography>
+            </Box>
           </Box>
-          <MenuIcon
-            sx={{ display: { xs: "block", sm: "none" } }}
-            onClick={openDrawer}
-          />
           <SCLinkContainer>
             <Link to="/cart">
-              <Badge badgeContent={3} color="error">
+              <Badge badgeContent={cart.length} color="error">
                 <ShoppingCartIcon sx={{ color: "white" }} />
               </Badge>
             </Link>

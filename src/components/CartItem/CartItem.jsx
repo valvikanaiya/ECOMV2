@@ -12,17 +12,23 @@ import {
   Select,
   Typography,
 } from "@mui/material";
+import { QuantityArray } from "@utils/utils";
+import { useECommerce } from "../../hooks/useECommerce";
 
 const CartItem = ({ product }) => {
+  const { changeQuantity, removeFromCart } = useECommerce();
   const { image, title } = product;
-
-  const QuantityArray = Array.from({ length: 10 }, (_, i) => i + 1);
 
   return (
     <Box>
       <Card variant="outlined">
-        <Box sx={{ display: "flex", gap: 2 }}>
-          <Box height={"100%"} width={"30%"}>
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: { xs: "column", sm: "row" },
+            gap: 2,
+          }}>
+          <Box height={"100%"} sx={{ width: { xs: "100%", sm: "30%" } }}>
             <CardMedia
               component="img"
               height="150"
@@ -31,7 +37,7 @@ const CartItem = ({ product }) => {
               sx={{ objectFit: "contain" }}
             />
           </Box>
-          <Box width={"70%"}>
+          <Box sx={{ width: { xs: "100%", sm: "70%" } }}>
             <CardContent>
               <Typography component="div" variant="h5">
                 {product.title}
@@ -58,9 +64,10 @@ const CartItem = ({ product }) => {
             <CardActions>
               <Button
                 variant="outlined"
-                size="large"                
+                size="large"
                 sx={{ display: "block" }}
-                color="error">
+                color="error"
+                onClick={() => removeFromCart(product.id)}>
                 Remove
               </Button>
               <FormControl size="small" sx={{ width: "100px" }}>
@@ -70,7 +77,7 @@ const CartItem = ({ product }) => {
                   id="demo-simple-select"
                   value={product.quantity}
                   label="Age"
-                  onChange={() => {}}>
+                  onChange={(e) => changeQuantity(product.id, e.target.value)}>
                   {QuantityArray.map((item) => (
                     <MenuItem key={item} value={item}>
                       {item}

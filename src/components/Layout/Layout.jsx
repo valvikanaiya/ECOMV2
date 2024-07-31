@@ -10,7 +10,7 @@ const Layout = () => {
         flexDirection: "column",
       }}>
       <Navigation />
-      <Box>
+      <Box sx={{ minHeight: "calc(100dvh - 4rem)" }}>
         <Outlet />
       </Box>
     </Box>

@@ -46,7 +46,6 @@ const Products = () => {
       const url = categories
         ? `${api.products}/category/${categories}`
         : api.products;
-      console.log(url);
       const result = await axiosInstance.get(url, {
         params: { sort: searchParams.get("sort") },
       });
@@ -78,7 +77,6 @@ const Products = () => {
     getCategorys();
   }, []);
 
-
   return (
     <Box component={"div"}>
       {isLoading ? (
@@ -100,6 +98,8 @@ const Products = () => {
               top: "4rem",
               gap: 1,
               p: 2,
+              borderBottom: "1px solid",
+              borderColor: "primary.main",
             }}>
             <Box sx={{ display: "flex", gap: 1, overflowY: "hidden", flex: 1 }}>
               {categoryList && categoryList.length > 0 && (
@@ -141,7 +141,7 @@ const Products = () => {
               </ToggleButton>
             </ToggleButtonGroup>
           </Box>
-          <Grid p={4} container spacing={2}>
+          <Grid container spacing={2} sx={{ p: { xs: 2, sm: 4 } }}>
             {products &&
               products.map((item) => (
                 <Grid xs={12} sm={4} md={3} item key={item.title}>

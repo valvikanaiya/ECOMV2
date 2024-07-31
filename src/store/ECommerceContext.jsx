@@ -15,6 +15,7 @@ const ACTIONS = {
   ADD_TO_CART: "ADD_TO_CART",
   REMOVE_FROM_CART: "REMOVE_FROM_CART",
   CLEAR_CART: "CLEAR_CART",
+  CHANGE_QUANTITY: "CHANGE_QUANTITY",
 };
 
 // Create a reducer
@@ -33,8 +34,16 @@ const reducer = (state, action) => {
       };
     case ACTIONS.CLEAR_CART:
       return { ...state, cart: [] };
-    case ACTIONS.PLACE_ORDER:
-      return { ...state, orders: [...state.orders, action.payload], cart: [] };
+    case ACTIONS.CHANGE_QUANTITY: {
+      return {
+        ...state,
+        cart: state.cart.map((item) =>
+          item.id === action.payload.id
+            ? { ...item, quantity: action.payload.quantity }
+            : { ...item }
+        ),
+      };
+    }
     default:
       return state;
   }
