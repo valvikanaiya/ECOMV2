@@ -17,6 +17,7 @@ export function stringToColor(string) {
 
   return color;
 }
+
 export function stringAvatar(name) {
   return {
     sx: {
@@ -25,3 +26,14 @@ export function stringAvatar(name) {
     children: `${name.split(" ")[0][0]}${name.split(" ")[1][0]}`,
   };
 }
+
+export const getCartSubtotal = (products) => {
+  let total = 0;
+  let totalitem = 0;
+  products.forEach((element) => {
+    total += element.price * element.quantity;
+    totalitem += element.quantity;
+  });
+  console.log(total, totalitem, products);
+  return { total, totalitem };
+};

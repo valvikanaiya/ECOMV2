@@ -6,6 +6,7 @@ import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
 import App from "./App";
+import { ECommerceProvider } from "./store/ECommerceContext";
 
 const darkTheme = createTheme({
   palette: {
@@ -18,7 +19,9 @@ const AppContent = () => {
     <ThemeProvider theme={darkTheme}>
       <CssBaseline />
       <BrowserRouter>
-        <App />
+        <ECommerceProvider>
+          <App />
+        </ECommerceProvider>
       </BrowserRouter>
     </ThemeProvider>
   );

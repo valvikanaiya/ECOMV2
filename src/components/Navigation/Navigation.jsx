@@ -3,6 +3,11 @@ import {
   Avatar,
   Badge,
   Box,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
   Menu,
   MenuItem,
   SwipeableDrawer,
@@ -18,12 +23,19 @@ import MenuIcon from "@mui/icons-material/Menu";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 import { stringAvatar } from "@utils/utils";
 import { useState } from "react";
+import { Home } from "@mui/icons-material";
+import { useECommerce } from "../../hooks/useECommerce";
 
-
+const MobileNavLink = [
+  { path: "/", icon: <Home />, label: "Home" },
+  { path: "/cart", icon: <ShoppingCartIcon />, label: "Cart" },
+];
 
 const Navigation = () => {
   const [anchorEl, setAnchorEl] = useState(null);
   const [drawerOpen, setDrawerOpen] = useState(false);
+  const { state } = useECommerce();
+  const { user } = state;
   const open = Boolean(anchorEl);
 
   const handleClick = (event) => {
@@ -41,13 +53,30 @@ const Navigation = () => {
     setDrawerOpen(false);
   };
 
-
-  
+  const DrawerList = (
+    <>
+      <Box sx={{ width: 250 }} role="presentation">
+        <List>
+          {MobileNavLink.map((link) => (
+            <ListItem key={link.path}>
+              <ListItemButton
+                component={Link}
+                onClick={closeDrawer}
+                to={link.path}>
+                <ListItemIcon>{link.icon}</ListItemIcon>
+                <ListItemText primary={link.label} />
+              </ListItemButton>
+            </ListItem>
+          ))}
+        </List>
+      </Box>
+    </>
+  );
   return (
     <>
       <div>
         <SwipeableDrawer open={drawerOpen} onClose={closeDrawer}>
-          {"rest"}
+          {DrawerList}
         </SwipeableDrawer>
       </div>
       <AppBar position="sticky">
@@ -80,14 +109,18 @@ const Navigation = () => {
             </Link>
             <Avatar
               sx={{ width: 30, height: 30 }}
-              {...stringAvatar("Jed Watson")}
+              {...stringAvatar(
+                `${user?.name?.firstname} ${user?.name?.lastname}`
+              )}
               onClick={handleClick}
             />
           </SCLinkContainer>
           <SCUserContainer>
             <Avatar
               sx={{ width: 30, height: 30 }}
-              {...stringAvatar("Jed Watson")}
+              {...stringAvatar(
+                `${user?.name?.firstname} ${user?.name?.lastname}`
+              )}
               onClick={handleClick}
             />
             <Menu

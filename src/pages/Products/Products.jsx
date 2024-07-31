@@ -78,6 +78,7 @@ const Products = () => {
     getCategorys();
   }, []);
 
+
   return (
     <Box component={"div"}>
       {isLoading ? (
@@ -107,6 +108,7 @@ const Products = () => {
                     label={`All`}
                     component={Link}
                     to={`/`}
+                    size="small"
                     variant="outlined"
                     color="primary"
                     clickable
@@ -114,6 +116,7 @@ const Products = () => {
                   {categoryList.map((item) => (
                     <Chip
                       key={item}
+                      size="small"
                       label={`${item}`}
                       component={Link}
                       to={`/${item}`}

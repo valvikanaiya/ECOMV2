@@ -5,6 +5,7 @@ import {
   CardActions,
   CardContent,
   CardMedia,
+  Rating,
   Typography,
 } from "@mui/material";
 import { Link } from "react-router-dom";
@@ -12,27 +13,40 @@ import { Link } from "react-router-dom";
 const ProductCard = ({ product }) => {
   const { title, price, id, image } = product;
   return (
-    <Card>
+    <Card variant="outlined">
       <CardMedia
         component="img"
         height="140"
         image={image}
         alt={title}
+        loading="lazy"
         sx={{ objectFit: "contain" }}
       />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
           {title?.slice(0, 15) + "..."}
         </Typography>
-        <Typography gutterBottom variant="caption" component="div">
+        <Typography gutterBottom variant="caption" mb={1} component="div">
           $ {price}
         </Typography>
+        <Rating
+          size="small"
+          name="half-rating-read"
+          defaultValue={product.rating.rate}
+          precision={0.5}
+          readOnly
+        />
       </CardContent>
       <CardActions>
-        <Button component={Link} to={`/product/${id}`} size="small">
+        <Button
+          variant="outlined"
+          component={Link}
+          fullWidth
+          to={`/product/${id}`}
+          size="small"
+          sx={{ display: "block", p: 1, textAlign: "center" }}>
           view
         </Button>
-        {/* <Button size="small">Learn More</Button> */}
       </CardActions>
     </Card>
   );
