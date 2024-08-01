@@ -1,5 +1,5 @@
-import React, { Suspense } from "react";
-import { Link, Outlet } from "react-router-dom";
+import { Suspense, useEffect, useState } from "react";
+import { Link, Outlet, useNavigate } from "react-router-dom";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import {
   Box,
@@ -16,6 +16,7 @@ import {
 import { Home, ShoppingCart, People, Menu } from "@mui/icons-material";
 import Loader from "../Loader/Loader";
 import { useTheme } from "@mui/material/styles";
+import { useECommerce } from "../../hooks/useECommerce";
 
 const drawerWidth = 240;
 
@@ -44,11 +45,20 @@ const drawer = (
 const Dashboard = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
-  const [mobileOpen, setMobileOpen] = React.useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const { state } = useECommerce();
+  const { user } = state;
+  const navigate = useNavigate();
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
+
+  useEffect(() => {
+    if (user?.authType !== "admin") {
+      navigate("/", { replace: true });
+    }
+  }, [user]);
 
   return (
     <Box sx={{ display: "flex", maxWidth: "100dvw" }}>

@@ -7,6 +7,7 @@ import axiosInstance from "./utils/axious";
 import { api } from "./utils/api";
 import { useECommerce } from "./hooks/useECommerce";
 import Dashboard from "./components/Dashboard/Dashboard";
+import AddToHome from "./components/AddToHome/AddToHome";
 
 const App = () => {
   const { setUser } = useECommerce();
@@ -25,26 +26,38 @@ const App = () => {
 
   useEffect(() => {
     getUser();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
-    <Suspense fallback={<Loader />}>
-      <Routes>
-        <Route element={<Dashboard />}>
-          {dashboardRoutes.map((route) => (
+    <>
+      <AddToHome />
+      <Suspense fallback={<Loader />}>
+        <Routes>
+          <Route element={<Dashboard />}>
+            {dashboardRoutes.map((route) => (
+              <Route
+                key={route.path}
+                path={route.path}
+                element={route.element}
+              />
+            ))}
+          </Route>
+          <Route element={<Layout />}>
+            {protectedRoutes.map((route) => (
+              <Route
+                key={route.path}
+                path={route.path}
+                element={route.element}
+              />
+            ))}
+          </Route>
+          {publicRoutes.map((route) => (
             <Route key={route.path} path={route.path} element={route.element} />
           ))}
-        </Route>
-        <Route element={<Layout />}>
-          {protectedRoutes.map((route) => (
-            <Route key={route.path} path={route.path} element={route.element} />
-          ))}
-        </Route>
-        {publicRoutes.map((route) => (
-          <Route key={route.path} path={route.path} element={route.element} />
-        ))}
-      </Routes>
-    </Suspense>
+        </Routes>
+      </Suspense>
+    </>
   );
 };
 

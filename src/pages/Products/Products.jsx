@@ -73,6 +73,7 @@ const Products = () => {
   useEffect(() => {
     getProduct();
   }, [searchParams, categories]);
+  
   useEffect(() => {
     getCategorys();
   }, []);

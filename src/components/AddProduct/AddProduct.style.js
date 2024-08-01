@@ -33,7 +33,7 @@ export const Textarea = styled(TextareaAutosize)(
     font-size: 0.875rem;
     font-weight: 400;
     line-height: 1.5;
-    padding: 8px 12px;
+    padding: 14px 12px;
     border-radius: 4px;
     color: ${theme.palette.mode === "dark" ? grey[300] : grey[900]};
     background: ${theme.palette.mode === "dark" ? grey[900] : "#fff"};
@@ -60,6 +60,7 @@ export const ModalContent = styled(Box)(({ theme }) => ({
   left: "50%",
   transform: "translate(-50%, -50%)",
   background: "white",
+  borderRadius: "4px",
   boxShadow: theme.shadows[24],
   padding: theme.spacing(4),
 }));

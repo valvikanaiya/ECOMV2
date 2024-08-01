@@ -31,7 +31,7 @@ const Products = ({ product }) => {
             </Typography>
           </CardContent>
           <CardActions>
-            <Button component={Link} to={`${product.id}`}>
+            <Button component={Link} to={`/dashboard/products/${product.id}`}>
               View Details
             </Button>
           </CardActions>

@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import { Link } from "react-router-dom";
 import {
+  Box,
   Button,
   Card,
   CardActions,
@@ -22,17 +23,19 @@ const ProductCard = ({ product }) => {
         justifyContent: "space-between",
         height: "100%",
       }}>
-      <CardMedia
-        component="img"
-        height="140"
-        image={image}
-        alt={title}
-        loading="lazy"
-        sx={{ objectFit: "contain" }}
-      />
+      <Box p={2}>
+        <CardMedia
+          component="img"
+          height="140"
+          image={image}
+          alt={title}
+          loading="lazy"
+          sx={{ objectFit: "contain" }}
+        />
+      </Box>
       <CardContent>
-        <Typography gutterBottom variant="h5" component="div">
-          {title?.slice(0, 15) + "..."}
+        <Typography gutterBottom variant="p" component="p">
+          {title?.slice(0, 20) + "..."}
         </Typography>
         <Typography gutterBottom variant="caption" mb={1} component="div">
           $ {price}

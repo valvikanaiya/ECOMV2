@@ -81,15 +81,18 @@ const Navigation = () => {
       </Box>
     </>
   );
-  
+
   return (
     <>
       <div>
-        <SwipeableDrawer open={drawerOpen} onClose={closeDrawer}>
+        <SwipeableDrawer
+          open={drawerOpen}
+          onClose={closeDrawer}
+          onOpen={drawerOpen}>
           {DrawerList}
         </SwipeableDrawer>
       </div>
-      <AppBar position="sticky">
+      <AppBar sx={{ zIndex: 99 }} position="sticky">
         <SCToolBar>
           <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
             <MenuIcon

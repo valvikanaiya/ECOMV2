@@ -97,13 +97,13 @@ const AddProduct = () => {
                 variant="outlined"
                 placeholder="Description"
                 required
-                sx={{ maxHeight: "100px", overflowY: "scroll" }}
+                sx={{ maxHeight: "90px", overflowY: "scroll" }}
               />
               <Button
                 type="submit"
                 fullWidth
                 variant="contained"
-                sx={{ mt: 3, mb: 2 }}>
+                sx={{ mt: 0, mb: 2 }}>
                 Submit
               </Button>
             </Box>
