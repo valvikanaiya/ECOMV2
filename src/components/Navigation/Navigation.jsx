@@ -144,6 +144,7 @@ const Navigation = () => {
               anchorEl={anchorEl}
               open={open}
               onClose={handleClose}
+              onClick={handleClose}
               anchorOrigin={{
                 vertical: "bottom",
                 horizontal: "right",
@@ -152,9 +153,15 @@ const Navigation = () => {
                 vertical: "top",
                 horizontal: "center",
               }}>
-              <MenuItem onClick={handleClose}>Profile</MenuItem>
-              <MenuItem onClick={handleClose}>My account</MenuItem>
-              <MenuItem onClick={handleClose}>Logout</MenuItem>
+              <MenuItem component={Link} to={"/profile"}>
+                Profile
+              </MenuItem>
+              <MenuItem component={Link} to={"/dashboard"}>
+                Dasboard
+              </MenuItem>
+              <MenuItem component={Link} to={""}>
+                Logout
+              </MenuItem>
             </Menu>
           </SCUserContainer>
         </SCToolBar>

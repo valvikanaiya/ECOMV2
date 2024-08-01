@@ -58,6 +58,7 @@ const Dashboard = () => {
     if (user?.authType !== "admin") {
       navigate("/", { replace: true });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user]);
 
   return (

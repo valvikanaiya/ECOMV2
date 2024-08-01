@@ -64,13 +64,18 @@ const AddToHome = () => {
       window.removeEventListener("beforeinstallprompt", handelAppInstall);
       window.removeEventListener("appinstalled", handelAppInstaled);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
     <SCWrapper ref={wrapper} id={"installButtonWrapper"}>
       <Box sx={{ display: "flex", alignItems: "center" }}>
         <Box component={"img"} src={"/Favicon.svg"}></Box>
         <Button id="installButton">
-          <Typography color={"Highlight"} sx={{fontWeight:600,textTransform:"capitalize"}}>Add to home screen</Typography>
+          <Typography
+            color={"Highlight"}
+            sx={{ fontWeight: 600, textTransform: "capitalize" }}>
+            Add to home screen
+          </Typography>
         </Button>
       </Box>
       <Button

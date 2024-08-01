@@ -5,4 +5,5 @@ export const api = {
   getCategory: `${baseUrl}/products/categories`,
   getCartsItem: `${baseUrl}/carts`,
   getUser: `${baseUrl}/users`,
+  addProduct: `${baseUrl}/products`,
 };
