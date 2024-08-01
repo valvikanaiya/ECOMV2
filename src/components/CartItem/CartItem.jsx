@@ -28,7 +28,13 @@ const CartItem = ({ product }) => {
             flexDirection: { xs: "column", sm: "row" },
             gap: 2,
           }}>
-          <Box height={"100%"} sx={{ width: { xs: "100%", sm: "30%" } }}>
+          <Box
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              width: { xs: "100%", sm: "30%" },
+            }}>
             <CardMedia
               component="img"
               height="150"

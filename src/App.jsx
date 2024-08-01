@@ -1,12 +1,12 @@
 import { Suspense, useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
 import Layout from "@components/Layout/Layout";
-import { Dashboard } from "@mui/icons-material";
 import Loader from "@components/Loader/Loader";
 import { dashboardRoutes, protectedRoutes, publicRoutes } from "./routes";
 import axiosInstance from "./utils/axious";
 import { api } from "./utils/api";
 import { useECommerce } from "./hooks/useECommerce";
+import Dashboard from "./components/Dashboard/Dashboard";
 
 const App = () => {
   const { setUser } = useECommerce();
@@ -16,7 +16,7 @@ const App = () => {
     try {
       const result = await axiosInstance.get(`${api.getUser}/${userId}`);
       if (result.status === 200) {
-        setUser(result.data);
+        setUser({ ...result.data, authType: "admin" });
       }
     } catch (error) {
       console.error(error);
@@ -26,16 +26,17 @@ const App = () => {
   useEffect(() => {
     getUser();
   }, []);
+
   return (
     <Suspense fallback={<Loader />}>
       <Routes>
-        <Route element={<Layout />}>
-          {protectedRoutes.map((route) => (
+        <Route element={<Dashboard />}>
+          {dashboardRoutes.map((route) => (
             <Route key={route.path} path={route.path} element={route.element} />
           ))}
         </Route>
-        <Route element={<Dashboard />}>
-          {dashboardRoutes.map((route) => (
+        <Route element={<Layout />}>
+          {protectedRoutes.map((route) => (
             <Route key={route.path} path={route.path} element={route.element} />
           ))}
         </Route>

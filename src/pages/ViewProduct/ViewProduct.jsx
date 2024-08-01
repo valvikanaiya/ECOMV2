@@ -3,30 +3,26 @@ import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import {
   Box,
-  Button,
   Card,
   CardActions,
   CardContent,
   CardMedia,
   Chip,
-  FormControl,
-  InputLabel,
-  MenuItem,
   Rating,
-  Select,
   Typography,
 } from "@mui/material";
 import Loader from "@components/Loader/Loader";
 import axiosInstance from "@utils/axious";
 import { api } from "@utils/api";
-import { QuantityArray } from "@utils/utils";
+
 import { useECommerce } from "../../hooks/useECommerce";
+import ProductAction from "../../components/ProductAction/ProductAction";
 
 const ViewProduct = () => {
   const [product, setProduct] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [quantity, setQuantity] = useState(1);
-  const { state, addToCart, removeFromCart, changeQuantity } = useECommerce();
+  const { state, changeQuantity } = useECommerce();
   const { id } = useParams();
   const { cart } = state;
 
@@ -129,34 +125,44 @@ const ViewProduct = () => {
               />
             </CardContent>
             <CardActions>
-              {!productAddedinCart ? (
-                <Button
-                  color="warning"
-                  onClick={() => addToCart({ ...product, quantity })}>
-                  Add to Cart
-                </Button>
-              ) : (
-                <Button
-                  color="error"
-                  onClick={() => removeFromCart(product.id)}>
-                  Remove To Cart
-                </Button>
-              )}
-              <FormControl size="small" sx={{ width: "100px" }}>
-                <InputLabel id="demo-simple-select-label">Qty</InputLabel>
-                <Select
-                  labelId="demo-simple-select-label"
-                  id="demo-simple-select"
-                  value={quantity}
-                  label="Age"
-                  onChange={handelChangeQuantity}>
-                  {QuantityArray.map((item) => (
-                    <MenuItem key={item} value={item}>
-                      {item}
-                    </MenuItem>
-                  ))}
-                </Select>
-              </FormControl>
+              <ProductAction
+                product={product}
+                handelChangeQuantity={handelChangeQuantity}
+                productAddedinCart={productAddedinCart}
+                quantity={quantity}
+              />
+              {/* {state?.user?.authType !== "admin" && (
+                <>
+                  {!productAddedinCart ? (
+                    <Button
+                      color="warning"
+                      onClick={() => addToCart({ ...product, quantity })}>
+                      Add to Cart
+                    </Button>
+                  ) : (
+                    <Button
+                      color="error"
+                      onClick={() => removeFromCart(product.id)}>
+                      Remove To Cart
+                    </Button>
+                  )}
+                  <FormControl size="small" sx={{ width: "100px" }}>
+                    <InputLabel id="demo-simple-select-label">Qty</InputLabel>
+                    <Select
+                      labelId="demo-simple-select-label"
+                      id="demo-simple-select"
+                      value={quantity}
+                      label="Age"
+                      onChange={handelChangeQuantity}>
+                      {QuantityArray.map((item) => (
+                        <MenuItem key={item} value={item}>
+                          {item}
+                        </MenuItem>
+                      ))}
+                    </Select>
+                  </FormControl>
+                </>
+              )} */}
             </CardActions>
           </Box>
         </Card>
