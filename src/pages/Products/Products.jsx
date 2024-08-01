@@ -1,11 +1,4 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import {
-  Box,
-  Chip,
-  Grid,
-  ToggleButton,
-  ToggleButtonGroup,
-} from "@mui/material";
 import { useEffect, useState } from "react";
 import {
   Link,
@@ -13,6 +6,13 @@ import {
   useParams,
   useSearchParams,
 } from "react-router-dom";
+import {
+  Box,
+  Chip,
+  Grid,
+  ToggleButton,
+  ToggleButtonGroup,
+} from "@mui/material";
 import Loader from "@components/Loader/Loader";
 import ProductCard from "@components/ProductCard/ProductCard";
 import SortByAlphaIcon from "@mui/icons-material/SortByAlpha";

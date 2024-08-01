@@ -1,4 +1,6 @@
 import React, { Suspense } from "react";
+import { Link, Outlet } from "react-router-dom";
+import useMediaQuery from "@mui/material/useMediaQuery";
 import {
   Box,
   Drawer,
@@ -12,38 +14,38 @@ import {
   IconButton,
 } from "@mui/material";
 import { Home, ShoppingCart, People, Menu } from "@mui/icons-material";
-import { Link, Outlet } from "react-router-dom";
-import { useTheme } from "@mui/material/styles";
-import useMediaQuery from "@mui/material/useMediaQuery";
 import Loader from "../Loader/Loader";
+import { useTheme } from "@mui/material/styles";
 
 const drawerWidth = 240;
+
+const DashboardNavigation = [
+  { path: "/dashboard/products", label: "Products", icon: <Home /> },
+  { path: "/dashboard/orders", label: "Orders", icon: <ShoppingCart /> },
+  { path: "/dashboard/users", label: "Users", icon: <People /> },
+];
+
+const drawer = (
+  <div>
+    <Toolbar />
+    <Box sx={{ overflow: "auto" }}>
+      <List>
+        {DashboardNavigation.map((item) => (
+          <ListItem key={item.path} component={Link} to={item.path}>
+            <ListItemIcon>{item.icon}</ListItemIcon>
+            <ListItemText primary={item.label} />
+          </ListItem>
+        ))}
+      </List>
+    </Box>
+  </div>
+);
 
 const Dashboard = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const [mobileOpen, setMobileOpen] = React.useState(false);
 
-  const DashboardNavigation = [
-    { path: "/dashboard/products", label: "Products", icon: <Home /> },
-    { path: "/dashboard/orders", label: "Orders", icon: <ShoppingCart /> },
-    { path: "/dashboard/users", label: "Users", icon: <People /> },
-  ];
-  const drawer = (
-    <div>
-      <Toolbar />
-      <Box sx={{ overflow: "auto" }}>
-        <List>
-          {DashboardNavigation.map((item) => (
-            <ListItem key={item.path} component={Link} to={item.path}>
-              <ListItemIcon>{item.icon}</ListItemIcon>
-              <ListItemText primary={item.label} />
-            </ListItem>
-          ))}
-        </List>
-      </Box>
-    </div>
-  );
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };

@@ -1,4 +1,5 @@
 /* eslint-disable react/prop-types */
+import { useECommerce } from "../../hooks/useECommerce";
 import {
   Box,
   Button,
@@ -7,8 +8,7 @@ import {
   MenuItem,
   Select,
 } from "@mui/material";
-import { QuantityArray } from "../../utils/utils";
-import { useECommerce } from "../../hooks/useECommerce";
+import { QuantityArray } from "@utils/utils";
 
 const ProductAction = ({
   product,
@@ -17,7 +17,7 @@ const ProductAction = ({
   quantity,
 }) => {
   const { state, addToCart, removeFromCart } = useECommerce();
-  console.log(state);
+
   return (
     <>
       {state?.user?.authType !== "admin" ? (

@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+import { useECommerce } from "../../hooks/useECommerce";
 import {
   Box,
   Button,
@@ -12,9 +14,7 @@ import {
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import CartItem from "@components/CartItem/CartItem";
 import { getCartSubtotal } from "@utils/utils";
-import { useECommerce } from "../../hooks/useECommerce";
 import { SCEmptyCartWrapper } from "./Cart.style";
-import { Link } from "react-router-dom";
 
 const Cart = () => {
   const { state } = useECommerce();

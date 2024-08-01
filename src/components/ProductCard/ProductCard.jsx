@@ -1,4 +1,5 @@
 /* eslint-disable react/prop-types */
+import { Link } from "react-router-dom";
 import {
   Button,
   Card,
@@ -8,10 +9,10 @@ import {
   Rating,
   Typography,
 } from "@mui/material";
-import { Link } from "react-router-dom";
 
 const ProductCard = ({ product }) => {
   const { title, price, id, image } = product;
+
   return (
     <Card
       variant="outlined"

@@ -1,4 +1,5 @@
 /* eslint-disable react/prop-types */
+import { useECommerce } from "../../hooks/useECommerce";
 import {
   Box,
   Button,
@@ -13,7 +14,6 @@ import {
   Typography,
 } from "@mui/material";
 import { QuantityArray } from "@utils/utils";
-import { useECommerce } from "../../hooks/useECommerce";
 
 const CartItem = ({ product }) => {
   const { changeQuantity, removeFromCart } = useECommerce();

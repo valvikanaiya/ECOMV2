@@ -1,3 +1,6 @@
+import { useState } from "react";
+import { Link } from "react-router-dom";
+import { useECommerce } from "../../hooks/useECommerce";
 import {
   AppBar,
   Avatar,
@@ -13,25 +16,24 @@ import {
   SwipeableDrawer,
   Typography,
 } from "@mui/material";
-import { Link } from "react-router-dom";
+import MenuIcon from "@mui/icons-material/Menu";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import { Home } from "@mui/icons-material";
+import { stringAvatar } from "@utils/utils";
 import {
   SCLinkContainer,
   SCToolBar,
   SCUserContainer,
 } from "./Navigation.style";
-import MenuIcon from "@mui/icons-material/Menu";
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import { stringAvatar } from "@utils/utils";
-import { useState } from "react";
-import { Home } from "@mui/icons-material";
-import { useECommerce } from "../../hooks/useECommerce";
 
 const Navigation = () => {
   const [anchorEl, setAnchorEl] = useState(null);
   const [drawerOpen, setDrawerOpen] = useState(false);
   const { state } = useECommerce();
   const { user, cart } = state;
+
   const open = Boolean(anchorEl);
+
   const MobileNavLink = [
     { path: "/", icon: <Home />, label: "Home" },
     {
@@ -44,6 +46,7 @@ const Navigation = () => {
       label: "Cart",
     },
   ];
+
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -78,6 +81,7 @@ const Navigation = () => {
       </Box>
     </>
   );
+  
   return (
     <>
       <div>

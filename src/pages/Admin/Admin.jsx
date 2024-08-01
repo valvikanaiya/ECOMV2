@@ -1,17 +1,18 @@
 import { useEffect, useState } from "react";
+import { useParams, useSearchParams } from "react-router-dom";
 import { Box, Fab, Grid } from "@mui/material";
 import AddProduct from "@components/AddProduct/AddProduct";
+import Loader from "@components/Loader/Loader";
 import Products from "@components/Products/Products";
-import { api } from "../../utils/api";
-import axiosInstance from "../../utils/axious";
-import { useParams, useSearchParams } from "react-router-dom";
-import Loader from "../../components/Loader/Loader";
+import { api } from "@utils/api";
+import axiosInstance from "@utils/axious";
 
 const Admin = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [products, setProducts] = useState([]);
   const { categories } = useParams();
   const [searchParams] = useSearchParams();
+
   const getProduct = async () => {
     try {
       setIsLoading(true);
@@ -28,9 +29,11 @@ const Admin = () => {
       setIsLoading(false);
     }
   };
+
   useEffect(() => {
     getProduct();
   }, []);
+
   return (
     <Box>
       <Box>

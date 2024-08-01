@@ -1,6 +1,6 @@
+import { useECommerce } from "../../hooks/useECommerce";
 import { Avatar, Box } from "@mui/material";
 import { stringAvatar } from "@utils/utils";
-import { useECommerce } from "../../hooks/useECommerce";
 
 const Profile = () => {
   const { state } = useECommerce();

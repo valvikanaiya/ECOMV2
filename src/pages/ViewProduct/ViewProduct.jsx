@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
+import { useECommerce } from "../../hooks/useECommerce";
 import {
   Box,
   Card,
@@ -12,11 +13,9 @@ import {
   Typography,
 } from "@mui/material";
 import Loader from "@components/Loader/Loader";
-import axiosInstance from "@utils/axious";
+import ProductAction from "@components/ProductAction/ProductAction";
 import { api } from "@utils/api";
-
-import { useECommerce } from "../../hooks/useECommerce";
-import ProductAction from "../../components/ProductAction/ProductAction";
+import axiosInstance from "@utils/axious";
 
 const ViewProduct = () => {
   const [product, setProduct] = useState(null);
