@@ -43,6 +43,7 @@ const NotFound = () => {
         </Typography>
         <Button
           component={Link}
+          to="/"
           variant="contained"
           sx={{ display: "block", mt: 3 }}>
           Bacm to home

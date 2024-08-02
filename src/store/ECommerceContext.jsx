@@ -6,6 +6,7 @@ const initialState = {
   user: null,
   products: [],
   cart: [],
+  authType: null,
 };
 
 // Define actions
@@ -16,6 +17,7 @@ const ACTIONS = {
   REMOVE_FROM_CART: "REMOVE_FROM_CART",
   CLEAR_CART: "CLEAR_CART",
   CHANGE_QUANTITY: "CHANGE_QUANTITY",
+  SET_AUTHTYPE: "SET_AUTHTYPE",
 };
 
 // Create a reducer
@@ -42,6 +44,12 @@ const reducer = (state, action) => {
             ? { ...item, quantity: action.payload.quantity }
             : { ...item }
         ),
+      };
+    }
+    case ACTIONS.SET_AUTHTYPE: {
+      return {
+        ...state,
+        authType: action.payload,
       };
     }
     default:

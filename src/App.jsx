@@ -10,14 +10,14 @@ import Dashboard from "./components/Dashboard/Dashboard";
 import AddToHome from "./components/AddToHome/AddToHome";
 
 const App = () => {
-  const { setUser } = useECommerce();
+  const { setUser, setAuthType } = useECommerce();
 
   const userId = 1;
   const getUser = async () => {
     try {
       const result = await axiosInstance.get(`${api.getUser}/${userId}`);
       if (result.status === 200) {
-        setUser({ ...result.data, authType: "admin" });
+        setUser({ ...result.data });
       }
     } catch (error) {
       console.error(error);
@@ -26,6 +26,14 @@ const App = () => {
 
   useEffect(() => {
     getUser();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    const auth = JSON.parse(localStorage.getItem("auth"));
+    if (auth?.authType) {
+      setAuthType(auth.authType);
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useECommerce } from "../../hooks/useECommerce";
 import {
   AppBar,
@@ -30,6 +30,7 @@ const Navigation = () => {
   const [anchorEl, setAnchorEl] = useState(null);
   const [drawerOpen, setDrawerOpen] = useState(false);
   const { state } = useECommerce();
+  const navigate = useNavigate();
   const { user, cart } = state;
 
   const open = Boolean(anchorEl);
@@ -58,20 +59,28 @@ const Navigation = () => {
   const openDrawer = () => {
     setDrawerOpen(true);
   };
+
   const closeDrawer = () => {
     setDrawerOpen(false);
   };
 
+  const handelLogOut = (e) => {
+    handleClick(e.currentTarget);
+    localStorage.clear();
+    navigate("/login", { replace: true });
+  };
+
   const DrawerList = (
     <>
-      <Box sx={{ width: 250 }} role="presentation">
+      <Box
+        sx={{ width: 250 }}
+        role="presentation"
+        onClick={closeDrawer}
+        onKeyDown={closeDrawer}>
         <List>
           {MobileNavLink.map((link) => (
-            <ListItem key={link.path}>
-              <ListItemButton
-                component={Link}
-                onClick={closeDrawer}
-                to={link.path}>
+            <ListItem key={link.path} disablePadding>
+              <ListItemButton component={Link} to={link.path}>
                 <ListItemIcon>{link.icon}</ListItemIcon>
                 <ListItemText primary={link.label} />
               </ListItemButton>
@@ -86,9 +95,10 @@ const Navigation = () => {
     <>
       <div>
         <SwipeableDrawer
+          anchor={"left"}
           open={drawerOpen}
           onClose={closeDrawer}
-          onOpen={drawerOpen}>
+          onOpen={openDrawer}>
           {DrawerList}
         </SwipeableDrawer>
       </div>
@@ -145,7 +155,6 @@ const Navigation = () => {
               open={open}
               onClose={handleClose}
               onClick={handleClose}
-              onTouchCancel={handleClose}
               anchorOrigin={{
                 vertical: "bottom",
                 horizontal: "right",
@@ -154,13 +163,16 @@ const Navigation = () => {
                 vertical: "top",
                 horizontal: "center",
               }}>
-              <MenuItem component={Link} to={"/profile"}>
+              <MenuItem onClick={handleClick} component={Link} to={"/profile"}>
                 Profile
               </MenuItem>
-              <MenuItem component={Link} to={"/dashboard"}>
+              <MenuItem
+                onClick={handleClick}
+                component={Link}
+                to={"/dashboard"}>
                 Dasboard
               </MenuItem>
-              <MenuItem component={Link} to={""}>
+              <MenuItem onClick={handelLogOut} to={""}>
                 Logout
               </MenuItem>
             </Menu>

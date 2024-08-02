@@ -12,8 +12,10 @@ import {
   ListItemIcon,
   ListItemText,
   IconButton,
+  Button,
 } from "@mui/material";
 import { Home, ShoppingCart, People, Menu } from "@mui/icons-material";
+import LogoutIcon from "@mui/icons-material/Logout";
 import Loader from "../Loader/Loader";
 import { useTheme } from "@mui/material/styles";
 import { useECommerce } from "../../hooks/useECommerce";
@@ -37,6 +39,10 @@ const drawer = (
             <ListItemText primary={item.label} />
           </ListItem>
         ))}
+        <ListItem component={Button}>
+          <ListItemIcon>{<LogoutIcon />}</ListItemIcon>
+          <ListItemText primary={"Logout"} />
+        </ListItem>
       </List>
     </Box>
   </div>
@@ -47,7 +53,7 @@ const Dashboard = () => {
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
   const [mobileOpen, setMobileOpen] = useState(false);
   const { state } = useECommerce();
-  const { user } = state;
+  const { user, authType } = state;
   const navigate = useNavigate();
 
   const handleDrawerToggle = () => {
@@ -55,8 +61,10 @@ const Dashboard = () => {
   };
 
   useEffect(() => {
-    if (user?.authType !== "admin") {
-      navigate("/", { replace: true });
+    if (authType) {
+      if (authType !== "admin") {
+        navigate("/", { replace: true });
+      }
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user]);

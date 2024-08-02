@@ -6,4 +6,5 @@ export const api = {
   getCartsItem: `${baseUrl}/carts`,
   getUser: `${baseUrl}/users`,
   addProduct: `${baseUrl}/products`,
+  login: `${baseUrl}/auth/login`,
 };

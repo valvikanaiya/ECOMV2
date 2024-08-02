@@ -1,4 +1,5 @@
 /* eslint-disable react/prop-types */
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useECommerce } from "../../hooks/useECommerce";
 import {
@@ -12,7 +13,6 @@ import {
   Select,
 } from "@mui/material";
 import { QuantityArray } from "@utils/utils";
-import { useState } from "react";
 import { ModalContent } from "../AddProduct/AddProduct.style";
 
 const ProductAction = ({
@@ -22,14 +22,17 @@ const ProductAction = ({
   quantity,
 }) => {
   const [open, setOpen] = useState(false);
-  console.log(open);
+
   const { state, addToCart, removeFromCart } = useECommerce();
+
   const handleOpen = () => {
     setOpen(true);
   };
+
   const handleClose = () => {
     setOpen(false);
   };
+
   return (
     <>
       <Modal
@@ -61,7 +64,7 @@ const ProductAction = ({
           </Box>
         </ModalContent>
       </Modal>
-      {state?.user?.authType !== "admin" ? (
+      {state?.authType !== "admin" ? (
         <>
           {!productAddedinCart ? (
             <Button
@@ -94,7 +97,10 @@ const ProductAction = ({
       ) : (
         <>
           <Box mt={2} sx={{ display: "flex", gap: 2 }}>
-            <Button component={Link} to="update" variant="contained">
+            <Button
+              component={Link}
+              to={`/dashboard/products/${product.id}/update`}
+              variant="contained">
               Update
             </Button>
             <Button onClick={handleOpen} variant="outlined" color="error">

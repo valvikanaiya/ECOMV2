@@ -48,7 +48,7 @@ const AddProduct = () => {
             <Typography id="modal-modal-title" variant="h5" component="h2">
               Add Product
             </Typography>
-            <Box component="form" onSubmit={handleSubmit}>
+            <Box component="form" onSubmit={handleSubmit} autoComplete="off">
               <TextField
                 required
                 margin="normal"

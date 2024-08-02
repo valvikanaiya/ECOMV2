@@ -6,6 +6,9 @@ export const useECommerce = () => {
   const setUser = (user) => {
     dispatch({ type: "SET_USER", payload: user });
   };
+  const setAuthType = (AuthType) => {
+    dispatch({ type: "SET_AUTHTYPE", payload: AuthType });
+  };
 
   const setProducts = (products) => {
     dispatch({ type: "SET_PRODUCTS", payload: products });
@@ -40,5 +43,6 @@ export const useECommerce = () => {
     removeFromCart,
     clearCart,
     placeOrder,
+    setAuthType,
   };
 };

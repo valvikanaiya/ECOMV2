@@ -53,8 +53,8 @@ const Admin = () => {
         aria-label="add"
         sx={{
           position: "fixed",
-          bottom: { xs: "16px", sm: "16px" },
-          right: { xs: "50%", sm: "16px" },
+          bottom: { xs: "16px", sm: 16 },
+          right: { xs: "50%", sm:50 },
           transform: "translate(50%, 0%)",
         }}>
         <AddProduct />

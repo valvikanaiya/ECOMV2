@@ -96,7 +96,7 @@ const ViewProduct = () => {
                 label={product.category}
                 component={Link}
                 size="small"
-                to={`/${product.category}`}
+                to={`/products/${product.category}`}
                 variant="outlined"
                 color="primary"
                 clickable
