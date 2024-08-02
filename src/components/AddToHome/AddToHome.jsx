@@ -5,15 +5,18 @@ import CloseIcon from "@mui/icons-material/Close";
 
 const AddToHome = () => {
   const wrapper = useRef();
+
   const handelHideButton = () => {
     wrapper.current.style.display = "none";
   };
 
   var deferredPrompt;
+
   const handelAppInstall = (event) => {
-    console.log(event);
     event.preventDefault();
+
     deferredPrompt = event;
+
     const installButtonWrapper = document.querySelector(
       "#installButtonWrapper"
     );
@@ -23,22 +26,28 @@ const AddToHome = () => {
     if (installButton && installButton.style) {
       installButtonWrapper.style.display = "flex";
     }
+
     installButton.addEventListener("click", async () => {
       deferredPrompt.prompt();
+
       const { outcome } = await deferredPrompt.userChoice;
+
       deferredPrompt = null;
+
       if (outcome === "accepted") {
         installButtonWrapper.style.display = "none";
         console.log("User accepted the install prompt.");
       }
     });
   };
+
   const handelAppInstaled = () => {
     const installButtonWrapper = document.querySelector(
       "#installButtonWrapper"
     );
     installButtonWrapper.style.display = "none";
   };
+
   useEffect(() => {
     if ("serviceWorker" in navigator) {
       navigator.serviceWorker
@@ -66,13 +75,14 @@ const AddToHome = () => {
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
   return (
     <SCWrapper ref={wrapper} id={"installButtonWrapper"}>
       <Box sx={{ display: "flex", alignItems: "center" }}>
         <Box component={"img"} src={"/Favicon.svg"}></Box>
         <Button id="installButton">
           <Typography
-            color={"Highlight"}
+            color={"primary"}
             sx={{ fontWeight: 600, textTransform: "capitalize" }}>
             Add to home screen
           </Typography>

@@ -7,6 +7,7 @@ const Cart = lazy(() => import("@pages/Cart/Cart"));
 const Profile = lazy(() => import("@pages/Profile/Profile"));
 const Admin = lazy(() => import("@pages/Admin/Admin"));
 const UpdateProduct = lazy(() => import("@pages/UpdateProduct/UpdateProduct"));
+const NotFound = lazy(() => import("@pages/NotFound/NotFound"));
 
 export const dashboardRoutes = [
   { path: "/dashboard", element: <Admin /> },
@@ -18,10 +19,13 @@ export const dashboardRoutes = [
 export const protectedRoutes = [
   { path: "/", element: <Products /> },
   { path: "/product", element: <Products /> },
-  { path: "/:categories", element: <Products /> },
+  { path: "/products/:categories", element: <Products /> },
   { path: "/product/:id", element: <ViewProduct /> },
   { path: "/cart", element: <Cart /> },
   { path: "/profile", element: <Profile /> },
 ];
 
-export const publicRoutes = [{ path: "/login", element: <Products /> }];
+export const publicRoutes = [
+  { path: "/login", element: <Products /> },
+  { path: "/*", element: <NotFound /> },
+];

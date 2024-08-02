@@ -145,6 +145,7 @@ const Navigation = () => {
               open={open}
               onClose={handleClose}
               onClick={handleClose}
+              onTouchCancel={handleClose}
               anchorOrigin={{
                 vertical: "bottom",
                 horizontal: "right",

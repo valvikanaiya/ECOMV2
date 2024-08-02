@@ -120,7 +120,7 @@ const Products = () => {
                       size="small"
                       label={`${item}`}
                       component={Link}
-                      to={`/${item}`}
+                      to={`/products/${item}`}
                       variant="outlined"
                       color="primary"
                       clickable
