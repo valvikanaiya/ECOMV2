@@ -1,52 +1,21 @@
 import { Suspense, useEffect, useState } from "react";
-import { Link, Outlet, useNavigate } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import {
   Box,
   Drawer,
   AppBar,
   Toolbar,
-  List,
   Typography,
-  ListItem,
-  ListItemIcon,
-  ListItemText,
   IconButton,
-  Button,
 } from "@mui/material";
-import { Home, ShoppingCart, People, Menu } from "@mui/icons-material";
-import LogoutIcon from "@mui/icons-material/Logout";
+import { Menu } from "@mui/icons-material";
 import Loader from "../Loader/Loader";
 import { useTheme } from "@mui/material/styles";
 import { useECommerce } from "../../hooks/useECommerce";
+import DrawerMenu from "../DrawerMenu/DrawerMenu";
 
 const drawerWidth = 240;
-
-const DashboardNavigation = [
-  { path: "/dashboard/products", label: "Products", icon: <Home /> },
-  { path: "/dashboard/orders", label: "Orders", icon: <ShoppingCart /> },
-  { path: "/dashboard/users", label: "Users", icon: <People /> },
-];
-
-const drawer = (
-  <div>
-    <Toolbar />
-    <Box sx={{ overflow: "auto" }}>
-      <List>
-        {DashboardNavigation.map((item) => (
-          <ListItem key={item.path} component={Link} to={item.path}>
-            <ListItemIcon>{item.icon}</ListItemIcon>
-            <ListItemText primary={item.label} />
-          </ListItem>
-        ))}
-        <ListItem component={Button}>
-          <ListItemIcon>{<LogoutIcon />}</ListItemIcon>
-          <ListItemText primary={"Logout"} />
-        </ListItem>
-      </List>
-    </Box>
-  </div>
-);
 
 const Dashboard = () => {
   const theme = useTheme();
@@ -60,11 +29,10 @@ const Dashboard = () => {
     setMobileOpen(!mobileOpen);
   };
 
+  console.log(authType);
   useEffect(() => {
-    if (authType) {
-      if (authType !== "admin") {
-        navigate("/", { replace: true });
-      }
+    if (authType !== "admin") {
+      navigate("/", { replace: true });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user]);
@@ -111,7 +79,7 @@ const Dashboard = () => {
               width: drawerWidth,
             },
           }}>
-          {drawer}
+          <DrawerMenu />
         </Drawer>
         <Drawer
           variant="persistent"
@@ -123,7 +91,7 @@ const Dashboard = () => {
               width: drawerWidth,
             },
           }}>
-          {drawer}
+          <DrawerMenu />
         </Drawer>
       </Box>
       <Box

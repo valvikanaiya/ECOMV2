@@ -18,6 +18,7 @@ import {
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
+import LoginIcon from "@mui/icons-material/Login";
 import { Home } from "@mui/icons-material";
 import { stringAvatar } from "@utils/utils";
 import {
@@ -132,22 +133,35 @@ const Navigation = () => {
                 <ShoppingCartIcon sx={{ color: "white" }} />
               </Badge>
             </Link>
-            <Avatar
-              sx={{ width: 30, height: 30 }}
-              {...stringAvatar(
-                `${user?.name?.firstname} ${user?.name?.lastname}`
-              )}
-              onClick={handleClick}
-            />
+            {state.user?.id ? (
+              <Avatar
+                sx={{ width: 30, height: 30 }}
+                {...stringAvatar(
+                  `${user?.name?.firstname} ${user?.name?.lastname}`
+                )}
+                onClick={handleClick}
+              />
+            ) : (
+              <Box
+                component={Link}
+                to="/login"
+                sx={{ display: "flex", alignItems: "center", gap: 1,textDecoration:"none",color:"white" }}>
+                <LoginIcon sx={{ color: "white" }} /> Login
+              </Box>
+            )}
           </SCLinkContainer>
           <SCUserContainer>
-            <Avatar
-              sx={{ width: 30, height: 30 }}
-              {...stringAvatar(
-                `${user?.name?.firstname} ${user?.name?.lastname}`
-              )}
-              onClick={handleClick}
-            />
+            {state.user?.id ? (
+              <Avatar
+                sx={{ width: 30, height: 30 }}
+                {...stringAvatar(
+                  `${user?.name?.firstname} ${user?.name?.lastname}`
+                )}
+                onClick={handleClick}
+              />
+            ) : (
+              <LoginIcon />
+            )}
             <Menu
               id="demo-positioned-menu"
               aria-labelledby="demo-positioned-button"
@@ -163,15 +177,22 @@ const Navigation = () => {
                 vertical: "top",
                 horizontal: "center",
               }}>
-              <MenuItem onClick={handleClick} component={Link} to={"/profile"}>
-                Profile
-              </MenuItem>
-              <MenuItem
-                onClick={handleClick}
-                component={Link}
-                to={"/dashboard"}>
-                Dasboard
-              </MenuItem>
+              {state.authType === "auth" && (
+                <MenuItem
+                  onClick={handleClick}
+                  component={Link}
+                  to={"/dashboard"}>
+                  Dasboard
+                </MenuItem>
+              )}
+              <>
+                <MenuItem
+                  onClick={handleClick}
+                  component={Link}
+                  to={"/profile"}>
+                  Profile
+                </MenuItem>
+              </>
               <MenuItem onClick={handelLogOut} to={""}>
                 Logout
               </MenuItem>
