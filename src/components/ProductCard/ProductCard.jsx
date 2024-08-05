@@ -1,5 +1,7 @@
 /* eslint-disable react/prop-types */
+import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
+import { useECommerce } from "../../hooks/useECommerce";
 import {
   Box,
   Button,
@@ -10,13 +12,11 @@ import {
   Rating,
   Typography,
 } from "@mui/material";
-import { useECommerce } from "../../hooks/useECommerce";
-import { useTranslation } from "react-i18next";
 
 const ProductCard = ({ product }) => {
   const { t } = useTranslation();
   const { state } = useECommerce();
-  
+
   const { title, price, id, image } = product;
 
   return (

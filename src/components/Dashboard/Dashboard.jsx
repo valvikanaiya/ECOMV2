@@ -28,7 +28,10 @@ const Dashboard = () => {
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
-  
+  const handleDrawerClose = () => {
+    setMobileOpen(false);
+  };
+
   useEffect(() => {
     if (authType !== "admin") {
       navigate("/", { replace: true });
@@ -78,7 +81,9 @@ const Dashboard = () => {
               width: drawerWidth,
             },
           }}>
-          <DrawerMenu />
+          <DrawerMenu
+            handleDrawerToggle={isMobile ? handleDrawerClose : null}
+          />
         </Drawer>
         <Drawer
           variant="persistent"
@@ -90,7 +95,9 @@ const Dashboard = () => {
               width: drawerWidth,
             },
           }}>
-          <DrawerMenu />
+          <DrawerMenu
+            handleDrawerToggle={isMobile ? handleDrawerClose : null}
+          />
         </Drawer>
       </Box>
       <Box

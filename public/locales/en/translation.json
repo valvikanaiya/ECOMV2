@@ -31,5 +31,6 @@
   "cancel": "Cancel",
   "page_note_found": "Page Note Found",
   "page_note_found_description": "The page you were looking for doesn&apos;t exist.",
-  "back_to_home": "Back to home"
+  "back_to_home": "Back to home",
+  "items": "Items"
 }

@@ -1,10 +1,10 @@
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Box, Button, Modal, TextField, Typography } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
 import axiosInstance from "@utils/axious";
 import { api } from "@utils/api";
 import { ModalContent, Textarea } from "./AddProduct.style";
-import { useTranslation } from "react-i18next";
 
 const AddProduct = () => {
   const { t } = useTranslation();

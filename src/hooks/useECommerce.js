@@ -34,7 +34,6 @@ export const useECommerce = () => {
     dispatch({ type: "PLACE_ORDER", payload: order });
   };
   const setUserSetting = (userSetting) => {
-    console.log(userSetting);
     dispatch({ type: "SET_USER_SETTING", payload: userSetting });
   };
 

@@ -1,5 +1,7 @@
 /* eslint-disable react/prop-types */
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+import { useECommerce } from "../../hooks/useECommerce";
 import {
   Box,
   Button,
@@ -9,8 +11,6 @@ import {
   CardMedia,
   Typography,
 } from "@mui/material";
-import { useECommerce } from "../../hooks/useECommerce";
-import { useTranslation } from "react-i18next";
 
 const Products = ({ product }) => {
   const { t } = useTranslation();

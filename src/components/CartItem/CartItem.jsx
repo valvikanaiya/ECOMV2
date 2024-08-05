@@ -1,4 +1,5 @@
 /* eslint-disable react/prop-types */
+import { useTranslation } from "react-i18next";
 import { useECommerce } from "../../hooks/useECommerce";
 import {
   Box,
@@ -14,7 +15,6 @@ import {
   Typography,
 } from "@mui/material";
 import { QuantityArray } from "@utils/utils";
-import { useTranslation } from "react-i18next";
 
 const CartItem = ({ product }) => {
   const { changeQuantity, removeFromCart, state } = useECommerce();
@@ -77,7 +77,7 @@ const CartItem = ({ product }) => {
                 sx={{ display: "block" }}
                 color="error"
                 onClick={() => removeFromCart(product.id)}>
-                {t("remove_to_card")}
+                {t("remove_to_cart")}
               </Button>
               <FormControl size="small" sx={{ width: "100px" }}>
                 <InputLabel id="demo-simple-select-label">

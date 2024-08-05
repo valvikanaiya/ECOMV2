@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
 import {
   Box,
   Button,
@@ -17,12 +19,10 @@ import {
   Typography,
 } from "@mui/material";
 import Logo from "@assets/logo.svg";
-import { Wrapper } from "./Login.style";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
-import axiosInstance from "../../utils/axious";
-import { api } from "../../utils/api";
-import { useNavigate } from "react-router-dom";
-import { useTranslation } from "react-i18next";
+import axiosInstance from "@utils/axious";
+import { api } from "@utils/api";
+import { Wrapper } from "./Login.style";
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);

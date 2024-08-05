@@ -1,6 +1,6 @@
-import { Box, Button, Grid, Typography } from "@mui/material";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
+import { Box, Button, Grid, Typography } from "@mui/material";
 
 const ContectUs = [
   { path: "mailto:test@gmail.com", label: "text@gmail.com" },

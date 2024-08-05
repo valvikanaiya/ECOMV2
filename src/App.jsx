@@ -13,10 +13,12 @@ import dayjs from "dayjs";
 import timezone from "dayjs/plugin/timezone";
 import { CURRENCY } from "./constant/currency";
 import { LANGUAGE_CODE } from "./constant/languageCode";
+import { useTranslation } from "react-i18next";
 
 dayjs.extend(timezone);
 
 const App = () => {
+  const { i18n } = useTranslation();
   const { setUser, setAuthType, setUserSetting } = useECommerce();
 
   const userId = 1;
@@ -54,6 +56,7 @@ const App = () => {
 
     const currency = CURRENCY[country] || "$";
     const langCode = LANGUAGE_CODE[country] || "en";
+    i18n.changeLanguage(langCode || "en");
     setUserSetting({ currency, langCode, ...countryInfo });
   };
 

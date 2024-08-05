@@ -1,8 +1,8 @@
-import { Box, Button, Typography } from "@mui/material";
 import { useEffect, useRef } from "react";
-import { SCWrapper } from "./AddToHome.style";
-import CloseIcon from "@mui/icons-material/Close";
 import { useTranslation } from "react-i18next";
+import { Box, Button, Typography } from "@mui/material";
+import CloseIcon from "@mui/icons-material/Close";
+import { SCWrapper } from "./AddToHome.style";
 
 const AddToHome = () => {
   const { t } = useTranslation();

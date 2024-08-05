@@ -1,3 +1,4 @@
+import { useTranslation } from "react-i18next";
 import { Link, useNavigate } from "react-router-dom";
 import {
   Box,
@@ -10,9 +11,9 @@ import {
 import { Home, ShoppingCart, People } from "@mui/icons-material";
 import CategoryIcon from "@mui/icons-material/Category";
 import LogoutIcon from "@mui/icons-material/Logout";
-import { useTranslation } from "react-i18next";
 
-const DrawerMenu = () => {
+// eslint-disable-next-line react/prop-types
+const DrawerMenu = ({ handleDrawerToggle }) => {
   const navigate = useNavigate();
   const { t } = useTranslation();
   const handelDelete = () => {
@@ -49,7 +50,11 @@ const DrawerMenu = () => {
       <Box sx={{ overflow: "auto" }}>
         <List>
           {DashboardNavigation.map((item) => (
-            <ListItemButton key={item.path} component={Link} to={item.path}>
+            <ListItemButton
+              key={item.path}
+              component={Link}
+              to={item.path}
+              onClick={handleDrawerToggle}>
               <ListItemIcon>{item.icon}</ListItemIcon>
               <ListItemText primary={item.label} />
             </ListItemButton>

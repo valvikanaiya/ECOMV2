@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { useECommerce } from "../../hooks/useECommerce";
 import {
   Box,
@@ -12,11 +13,10 @@ import {
   Modal,
   Select,
 } from "@mui/material";
-import { QuantityArray } from "@utils/utils";
 import { ModalContent } from "../AddProduct/AddProduct.style";
-import axiosInstance from "../../utils/axious";
-import { api } from "../../utils/api";
-import { useTranslation } from "react-i18next";
+import { QuantityArray } from "@utils/utils";
+import axiosInstance from "@utils/axious";
+import { api } from "@utils/api";
 
 const ProductAction = ({
   product,

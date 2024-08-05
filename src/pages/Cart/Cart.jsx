@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { useECommerce } from "../../hooks/useECommerce";
+import { useTranslation } from "react-i18next";
 import {
   Box,
   Button,
@@ -15,7 +16,6 @@ import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import CartItem from "@components/CartItem/CartItem";
 import { getCartSubtotal } from "@utils/utils";
 import { SCEmptyCartWrapper } from "./Cart.style";
-import { useTranslation } from "react-i18next";
 
 const Cart = () => {
   const { t } = useTranslation();
@@ -48,9 +48,9 @@ const Cart = () => {
               <Card variant="outlined">
                 <CardHeader
                   sx={{ paddingBottom: 0 }}
-                  title={`Subtotal (${
-                    subtotle ? subtotle.totalitem : 0
-                  } items):  $ ${
+                  title={`Subtotal (${subtotle ? subtotle.totalitem : 0} ${t(
+                    "items"
+                  )}):  ${state?.userSetting.currency} ${
                     subtotle ? Number(subtotle.total)?.toFixed(2) : "00"
                   }`}
                 />

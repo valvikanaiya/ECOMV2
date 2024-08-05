@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import { useECommerce } from "../../hooks/useECommerce";
 import {
   AppBar,
@@ -26,7 +27,6 @@ import {
   SCToolBar,
   SCUserContainer,
 } from "./Navigation.style";
-import { useTranslation } from "react-i18next";
 
 const Navigation = () => {
   const [anchorEl, setAnchorEl] = useState(null);
