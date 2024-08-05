@@ -177,7 +177,7 @@ const Navigation = () => {
                 vertical: "top",
                 horizontal: "center",
               }}>
-              {state.authType === "auth" && (
+              {state.authType === "admin" && (
                 <MenuItem
                   onClick={handleClick}
                   component={Link}

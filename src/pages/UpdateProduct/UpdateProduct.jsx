@@ -11,7 +11,7 @@ const UpdateProduct = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState(product);
   const { id } = useParams();
-  console.log(formData);
+
   const getProduct = async () => {
     try {
       setIsLoading(true);
@@ -32,8 +32,17 @@ const UpdateProduct = () => {
     setFormData({ ...formData, [name]: value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+    const data = Object.fromEntries(formData);
+    
+    try {
+      const result = await axiosInstance.put(`${api.products}/${id}`, data);
+      console.log(result.data);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   useEffect(() => {

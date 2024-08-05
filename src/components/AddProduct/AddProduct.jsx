@@ -24,10 +24,14 @@ const AddProduct = () => {
     const description = data.get("description");
     const image = data.get("image");
     const category = data.get("category");
-    console.log(title, price, description, image, category);
+
     const payload = { title, price, description, image, category };
-    const result = await axiosInstance.post(`${api.addProduct}`, payload);
-    console.log(result.data, result.status);
+    try {
+      const result = await axiosInstance.post(`${api.addProduct}`, payload);
+      console.log(result.data, result.status);
+    } catch (error) {
+      console.error(error);
+    }
     handleClose();
   };
 

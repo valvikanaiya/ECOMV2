@@ -28,8 +28,7 @@ const Dashboard = () => {
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
-
-  console.log(authType);
+  
   useEffect(() => {
     if (authType !== "admin") {
       navigate("/", { replace: true });

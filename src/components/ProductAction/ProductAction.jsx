@@ -14,6 +14,8 @@ import {
 } from "@mui/material";
 import { QuantityArray } from "@utils/utils";
 import { ModalContent } from "../AddProduct/AddProduct.style";
+import axiosInstance from "../../utils/axious";
+import { api } from "../../utils/api";
 
 const ProductAction = ({
   product,
@@ -30,6 +32,17 @@ const ProductAction = ({
   };
 
   const handleClose = () => {
+    setOpen(false);
+  };
+  const handleDelete = async () => {
+    try {
+      const result = await axiosInstance.delete(
+        `${api.products}/${product.id}`
+      );
+      console.log(result.data);
+    } catch (error) {
+      console.error(error);
+    }
     setOpen(false);
   };
 
@@ -57,7 +70,7 @@ const ProductAction = ({
               <Button onClick={handleClose} variant="outlined">
                 Cancel
               </Button>
-              <Button onClick={handleClose} variant="outlined" color="error">
+              <Button onClick={handleDelete} variant="outlined" color="error">
                 Delete
               </Button>
             </Box>

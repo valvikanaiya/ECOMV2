@@ -1,6 +1,7 @@
 import { Box } from "@mui/material";
 import { Outlet } from "react-router-dom";
 import Navigation from "../Navigation/Navigation";
+import Footer from "../Footer/Footer";
 
 const Layout = () => {
   return (
@@ -13,6 +14,7 @@ const Layout = () => {
       <Box sx={{ minHeight: "calc(100dvh - 4rem)" }}>
         <Outlet />
       </Box>
+      <Footer />
     </Box>
   );
 };
