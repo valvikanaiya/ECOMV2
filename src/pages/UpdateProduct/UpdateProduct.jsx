@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Box, Button, TextField } from "@mui/material";
 import Loader from "@components/Loader/Loader";
 import { api } from "@utils/api";
@@ -13,6 +13,7 @@ const UpdateProduct = () => {
   const [formData, setFormData] = useState(product);
   const { t } = useTranslation();
   const { id } = useParams();
+  const navigate = useNavigate();
 
   const getProduct = async () => {
     try {
@@ -42,6 +43,7 @@ const UpdateProduct = () => {
     try {
       const result = await axiosInstance.put(`${api.products}/${id}`, data);
       console.log(result.data);
+      navigate(`/dashboard/products/${id}`,{replace:true});
     } catch (error) {
       console.error(error);
     }

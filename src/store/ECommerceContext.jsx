@@ -79,7 +79,6 @@ const ECommerceContext = createContext();
 export const ECommerceProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
   const [exchangeRates, setExchangeRates] = useState({});
-  // console.log(exchangeRates);
 
   useEffect(() => {
     const fetchExchangeRates = async () => {
