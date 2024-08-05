@@ -2,8 +2,10 @@ import { Box, Button, Typography } from "@mui/material";
 import { useEffect, useRef } from "react";
 import { SCWrapper } from "./AddToHome.style";
 import CloseIcon from "@mui/icons-material/Close";
+import { useTranslation } from "react-i18next";
 
 const AddToHome = () => {
+  const { t } = useTranslation();
   const wrapper = useRef();
 
   const handelHideButton = () => {
@@ -84,7 +86,7 @@ const AddToHome = () => {
           <Typography
             color={"primary"}
             sx={{ fontWeight: 600, textTransform: "capitalize" }}>
-            Add to home screen
+            {t("add_to_home_screen")}
           </Typography>
         </Button>
       </Box>

@@ -9,8 +9,13 @@ import {
   CardMedia,
   Typography,
 } from "@mui/material";
+import { useECommerce } from "../../hooks/useECommerce";
+import { useTranslation } from "react-i18next";
 
 const Products = ({ product }) => {
+  const { t } = useTranslation();
+  const { state } = useECommerce();
+
   return (
     <Card sx={{ height: "350px" }}>
       <Box sx={{ display: "flex", flexDirection: "column" }}>
@@ -27,12 +32,12 @@ const Products = ({ product }) => {
               {product.title.slice(0, 25) + "..."}
             </Typography>
             <Typography variant="body2" color="text.secondary">
-              {`$ ${product.price}`}
+              {`${state.userSetting.currency} ${product.price}`}
             </Typography>
           </CardContent>
           <CardActions>
             <Button component={Link} to={`/dashboard/products/${product.id}`}>
-              View Details
+              {t("view_details")}
             </Button>
           </CardActions>
         </Box>

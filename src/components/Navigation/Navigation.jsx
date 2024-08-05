@@ -26,10 +26,12 @@ import {
   SCToolBar,
   SCUserContainer,
 } from "./Navigation.style";
+import { useTranslation } from "react-i18next";
 
 const Navigation = () => {
   const [anchorEl, setAnchorEl] = useState(null);
   const [drawerOpen, setDrawerOpen] = useState(false);
+  const { t } = useTranslation();
   const { state } = useECommerce();
   const navigate = useNavigate();
   const { user, cart } = state;
@@ -37,7 +39,7 @@ const Navigation = () => {
   const open = Boolean(anchorEl);
 
   const MobileNavLink = [
-    { path: "/", icon: <Home />, label: "Home" },
+    { path: "/", icon: <Home />, label: t("home") },
     {
       path: "/cart",
       icon: (
@@ -45,7 +47,7 @@ const Navigation = () => {
           <ShoppingCartIcon />
         </Badge>
       ),
-      label: "Cart",
+      label: t("cart"),
     },
   ];
 
@@ -145,7 +147,13 @@ const Navigation = () => {
               <Box
                 component={Link}
                 to="/login"
-                sx={{ display: "flex", alignItems: "center", gap: 1,textDecoration:"none",color:"white" }}>
+                sx={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 1,
+                  textDecoration: "none",
+                  color: "white",
+                }}>
                 <LoginIcon sx={{ color: "white" }} /> Login
               </Box>
             )}
@@ -182,7 +190,7 @@ const Navigation = () => {
                   onClick={handleClick}
                   component={Link}
                   to={"/dashboard"}>
-                  Dasboard
+                  {t("dashboard")}
                 </MenuItem>
               )}
               <>
@@ -190,11 +198,11 @@ const Navigation = () => {
                   onClick={handleClick}
                   component={Link}
                   to={"/profile"}>
-                  Profile
+                  {t("profile")}
                 </MenuItem>
               </>
               <MenuItem onClick={handelLogOut} to={""}>
-                Logout
+                {t("logout")}
               </MenuItem>
             </Menu>
           </SCUserContainer>

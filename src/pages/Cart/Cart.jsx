@@ -15,8 +15,10 @@ import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import CartItem from "@components/CartItem/CartItem";
 import { getCartSubtotal } from "@utils/utils";
 import { SCEmptyCartWrapper } from "./Cart.style";
+import { useTranslation } from "react-i18next";
 
 const Cart = () => {
+  const { t } = useTranslation();
   const { state } = useECommerce();
   const subtotle = state.cart?.length > 0 ? getCartSubtotal(state.cart) : null;
 
@@ -31,7 +33,7 @@ const Cart = () => {
               color={"primary"}
               fontWeight={"bold"}
               component="h5">
-              Shopping Cart
+              {t("shopping_cart")}
             </Typography>
           </Box>
           <Grid container py={3} spacing={2}>
@@ -58,13 +60,12 @@ const Cart = () => {
                     fontSize={12}
                     color={"text.secondary"}
                     component="p">
-                    Part of your order qualifies for FREE Delivery. Choose FREE
-                    Delivery option at checkout.
+                    {t("free_delivery_description")}
                   </Typography>
                 </CardContent>
                 <CardActions>
                   <Button fullWidth variant="outlined">
-                    Procide To By
+                    {t("proceed_to_buy")}
                   </Button>
                 </CardActions>
               </Card>
@@ -73,10 +74,16 @@ const Cart = () => {
         </>
       ) : (
         <SCEmptyCartWrapper sx={{ minHeight: "calc(100dvh - 8rem)" }}>
-          <Box sx={{ display: "flex",flexDirection:"column",alignItems:"center",gap:2 }}>
+          <Box
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              gap: 2,
+            }}>
             <AddShoppingCartIcon color={"error"} fontSize={"large"} />
             <Button variant="contained" component={Link} to={"/"}>
-              Add Products to cart
+              {t("add_products_to_card")}
             </Button>
           </Box>
         </SCEmptyCartWrapper>

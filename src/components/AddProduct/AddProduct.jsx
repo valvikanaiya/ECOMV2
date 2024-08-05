@@ -4,8 +4,10 @@ import AddIcon from "@mui/icons-material/Add";
 import axiosInstance from "@utils/axious";
 import { api } from "@utils/api";
 import { ModalContent, Textarea } from "./AddProduct.style";
+import { useTranslation } from "react-i18next";
 
 const AddProduct = () => {
+  const { t } = useTranslation();
   const [open, setOpen] = useState(false);
 
   const handleOpen = () => {
@@ -50,7 +52,7 @@ const AddProduct = () => {
           sx={{ maxWidth: "90dvw", maxHeight: "90dvh" }}>
           <Box>
             <Typography id="modal-modal-title" variant="h5" component="h2">
-              Add Product
+              {t("add_product")}
             </Typography>
             <Box component="form" onSubmit={handleSubmit} autoComplete="off">
               <TextField
@@ -108,7 +110,7 @@ const AddProduct = () => {
                 fullWidth
                 variant="contained"
                 sx={{ mt: 0, mb: 2 }}>
-                Submit
+                {t("submit")}
               </Button>
             </Box>
           </Box>

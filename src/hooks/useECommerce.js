@@ -33,6 +33,10 @@ export const useECommerce = () => {
   const placeOrder = (order) => {
     dispatch({ type: "PLACE_ORDER", payload: order });
   };
+  const setUserSetting = (userSetting) => {
+    console.log(userSetting);
+    dispatch({ type: "SET_USER_SETTING", payload: userSetting });
+  };
 
   return {
     state,
@@ -44,5 +48,6 @@ export const useECommerce = () => {
     clearCart,
     placeOrder,
     setAuthType,
+    setUserSetting,
   };
 };

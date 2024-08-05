@@ -14,9 +14,11 @@ import {
   Typography,
 } from "@mui/material";
 import { QuantityArray } from "@utils/utils";
+import { useTranslation } from "react-i18next";
 
 const CartItem = ({ product }) => {
-  const { changeQuantity, removeFromCart } = useECommerce();
+  const { changeQuantity, removeFromCart, state } = useECommerce();
+  const { t } = useTranslation();
   const { image, title } = product;
 
   return (
@@ -55,7 +57,8 @@ const CartItem = ({ product }) => {
                   variant="subtitle1"
                   color="text.secondary"
                   component="div">
-                  Price : ${product.price}
+                  {t("price")} :{" "}
+                  {`${state.userSetting?.currency} ${product.price}`}
                 </Typography>
               </Box>
               <Typography
@@ -74,10 +77,12 @@ const CartItem = ({ product }) => {
                 sx={{ display: "block" }}
                 color="error"
                 onClick={() => removeFromCart(product.id)}>
-                Remove
+                {t("remove_to_card")}
               </Button>
               <FormControl size="small" sx={{ width: "100px" }}>
-                <InputLabel id="demo-simple-select-label">Qty</InputLabel>
+                <InputLabel id="demo-simple-select-label">
+                  {t("quintity")}
+                </InputLabel>
                 <Select
                   labelId="demo-simple-select-label"
                   id="demo-simple-select"

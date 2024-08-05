@@ -1,10 +1,6 @@
 import { Box, Button, Grid, Typography } from "@mui/material";
+import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
-
-const QuickLInks = [
-  { path: "/", label: "Home" },
-  { path: "/cart", label: "Cart" },
-];
 
 const ContectUs = [
   { path: "mailto:test@gmail.com", label: "text@gmail.com" },
@@ -12,6 +8,12 @@ const ContectUs = [
 ];
 
 const Footer = () => {
+  const { t } = useTranslation();
+
+  const QuickLInks = [
+    { path: "/", label: t("home") },
+    { path: "/cart", label: t("cart") },
+  ];
   return (
     <Box bgcolor={"black"} color={"white"} p={4}>
       <Grid container spacing={2}>
@@ -37,7 +39,7 @@ const Footer = () => {
             color="yellow"
             component="h5"
             sx={{ textDecoration: "underline" }}>
-            Quick links
+            {t("quick_link")}
           </Typography>
 
           {QuickLInks.map((item) => (
@@ -62,7 +64,7 @@ const Footer = () => {
             color="yellow"
             component="h5"
             sx={{ textDecoration: "underline" }}>
-            Contact Us
+            {t("contact_us")}
           </Typography>
           {ContectUs.map((item) => (
             <Button

@@ -5,11 +5,13 @@ import Loader from "@components/Loader/Loader";
 import { api } from "@utils/api";
 import axiosInstance from "@utils/axious";
 import { Textarea } from "@components/AddProduct/AddProduct.style";
+import { useTranslation } from "react-i18next";
 
 const UpdateProduct = () => {
   const [product, setProduct] = useState();
   const [isLoading, setIsLoading] = useState(false);
   const [formData, setFormData] = useState(product);
+  const { t } = useTranslation();
   const { id } = useParams();
 
   const getProduct = async () => {
@@ -36,7 +38,7 @@ const UpdateProduct = () => {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
     const data = Object.fromEntries(formData);
-    
+
     try {
       const result = await axiosInstance.put(`${api.products}/${id}`, data);
       console.log(result.data);
@@ -120,7 +122,7 @@ const UpdateProduct = () => {
               fullWidth
               variant="contained"
               sx={{ mt: 0, mb: 2 }}>
-              Submit
+              {t("submit")}
             </Button>
           </Box>
         </Box>

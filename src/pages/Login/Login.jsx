@@ -22,9 +22,11 @@ import { Visibility, VisibilityOff } from "@mui/icons-material";
 import axiosInstance from "../../utils/axious";
 import { api } from "../../utils/api";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const { t } = useTranslation();
   const [authType, setAuthType] = useState("user");
   const navigate = useNavigate();
 
@@ -147,7 +149,7 @@ const Login = () => {
           </CardContent>
           <CardActions sx={{ px: 2 }}>
             <Button type="submit" variant="contained" fullWidth>
-              Login
+              {t("login")}
             </Button>
           </CardActions>
         </Card>

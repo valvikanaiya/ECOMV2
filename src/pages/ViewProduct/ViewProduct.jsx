@@ -106,7 +106,7 @@ const ViewProduct = () => {
                 variant="subtitle1"
                 color="text.secondary"
                 component="div">
-                ${product.price}
+                {`${state.userSetting.currency} ${product.price}`}
               </Typography>
               <Typography
                 my={2}

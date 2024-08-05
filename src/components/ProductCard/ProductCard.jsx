@@ -10,8 +10,13 @@ import {
   Rating,
   Typography,
 } from "@mui/material";
+import { useECommerce } from "../../hooks/useECommerce";
+import { useTranslation } from "react-i18next";
 
 const ProductCard = ({ product }) => {
+  const { t } = useTranslation();
+  const { state } = useECommerce();
+  
   const { title, price, id, image } = product;
 
   return (
@@ -38,7 +43,7 @@ const ProductCard = ({ product }) => {
           {title?.slice(0, 20) + "..."}
         </Typography>
         <Typography gutterBottom variant="caption" mb={1} component="div">
-          $ {price}
+          {state?.userSetting?.currency} {price}
         </Typography>
         <Rating
           size="small"
@@ -56,7 +61,7 @@ const ProductCard = ({ product }) => {
           to={`/product/${id}`}
           size="small"
           sx={{ display: "block", p: 1, textAlign: "center" }}>
-          view
+          {t("view_details")}
         </Button>
       </CardActions>
     </Card>

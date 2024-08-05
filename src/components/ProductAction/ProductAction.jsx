@@ -16,6 +16,7 @@ import { QuantityArray } from "@utils/utils";
 import { ModalContent } from "../AddProduct/AddProduct.style";
 import axiosInstance from "../../utils/axious";
 import { api } from "../../utils/api";
+import { useTranslation } from "react-i18next";
 
 const ProductAction = ({
   product,
@@ -24,6 +25,7 @@ const ProductAction = ({
   quantity,
 }) => {
   const [open, setOpen] = useState(false);
+  const { t } = useTranslation();
 
   const { state, addToCart, removeFromCart } = useECommerce();
 
@@ -56,7 +58,7 @@ const ProductAction = ({
         <ModalContent>
           <Box>
             <h1 id="unstyled-modal-title" className="modal-title">
-              Confirm delete
+              {t("confirm_delete")}
             </h1>
             <Divider />
             <Box mt={2}></Box>
@@ -64,14 +66,14 @@ const ProductAction = ({
               component={"p"}
               id="unstyled-modal-description"
               className="modal-description">
-              Are you sure you wont to delete this product ?
+              {t("confirm_delete_message")}
             </Box>
             <Box mt={2} sx={{ display: "flex", gap: 2 }}>
               <Button onClick={handleClose} variant="outlined">
-                Cancel
+                {t("cancel")}
               </Button>
               <Button onClick={handleDelete} variant="outlined" color="error">
-                Delete
+                {t("delete")}
               </Button>
             </Box>
           </Box>
@@ -83,11 +85,11 @@ const ProductAction = ({
             <Button
               color="warning"
               onClick={() => addToCart({ ...product, quantity })}>
-              Add to Cart
+              {t("add_to_cart")}
             </Button>
           ) : (
             <Button color="error" onClick={() => removeFromCart(product.id)}>
-              Remove To Cart
+              {t("remove_to_cart")}
             </Button>
           )}
 
@@ -114,10 +116,10 @@ const ProductAction = ({
               component={Link}
               to={`/dashboard/products/${product.id}/update`}
               variant="contained">
-              Update
+              {t("update")}
             </Button>
             <Button onClick={handleOpen} variant="outlined" color="error">
-              Delete
+              {t("delete")}
             </Button>
           </Box>
         </>

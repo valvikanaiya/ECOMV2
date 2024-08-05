@@ -1,5 +1,12 @@
 /* eslint-disable */
-import { createContext, useReducer, useContext } from "react";
+import axios from "axios";
+import {
+  createContext,
+  useReducer,
+  useContext,
+  useState,
+  useEffect,
+} from "react";
 
 //  initial state
 const initialState = {
@@ -7,6 +14,7 @@ const initialState = {
   products: [],
   cart: [],
   authType: null,
+  userSetting: null,
 };
 
 // Define actions
@@ -18,6 +26,7 @@ const ACTIONS = {
   CLEAR_CART: "CLEAR_CART",
   CHANGE_QUANTITY: "CHANGE_QUANTITY",
   SET_AUTHTYPE: "SET_AUTHTYPE",
+  SET_USER_SETTING: "SET_USER_SETTING",
 };
 
 // Create a reducer
@@ -52,6 +61,12 @@ const reducer = (state, action) => {
         authType: action.payload,
       };
     }
+    case ACTIONS.SET_USER_SETTING: {
+      return {
+        ...state,
+        userSetting: action.payload,
+      };
+    }
     default:
       return state;
   }
@@ -63,6 +78,18 @@ const ECommerceContext = createContext();
 // Create a Provider component
 export const ECommerceProvider = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
+  const [exchangeRates, setExchangeRates] = useState({});
+  // console.log(exchangeRates);
+
+  useEffect(() => {
+    const fetchExchangeRates = async () => {
+      const response = await axios.get(
+        "https://api.exchangerate-api.com/v4/latest/USD"
+      );
+      setExchangeRates(response.data.rates);
+    };
+    fetchExchangeRates();
+  }, []);
 
   return (
     <ECommerceContext.Provider value={{ state, dispatch }}>

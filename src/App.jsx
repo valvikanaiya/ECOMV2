@@ -8,9 +8,16 @@ import { api } from "./utils/api";
 import { useECommerce } from "./hooks/useECommerce";
 import Dashboard from "./components/Dashboard/Dashboard";
 import AddToHome from "./components/AddToHome/AddToHome";
+import { getCountriesForTimezone } from "countries-and-timezones";
+import dayjs from "dayjs";
+import timezone from "dayjs/plugin/timezone";
+import { CURRENCY } from "./constant/currency";
+import { LANGUAGE_CODE } from "./constant/languageCode";
+
+dayjs.extend(timezone);
 
 const App = () => {
-  const { setUser, setAuthType } = useECommerce();
+  const { setUser, setAuthType, setUserSetting } = useECommerce();
 
   const userId = 1;
   const getUser = async () => {
@@ -37,6 +44,21 @@ const App = () => {
     if (auth?.authType) {
       setAuthType(auth.authType);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const getTimeZon = async () => {
+    const userTimezone = dayjs?.tz?.guess();
+    const countryInfo = await getCountriesForTimezone(userTimezone)[0];
+    const country = countryInfo?.name?.toLowerCase();
+
+    const currency = CURRENCY[country] || "$";
+    const langCode = LANGUAGE_CODE[country] || "en";
+    setUserSetting({ currency, langCode, ...countryInfo });
+  };
+
+  useEffect(() => {
+    getTimeZon();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
