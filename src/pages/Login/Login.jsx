@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
+import { useECommerce } from "../../hooks/useECommerce";
 import {
   Box,
   Button,
@@ -23,15 +24,17 @@ import { Visibility, VisibilityOff } from "@mui/icons-material";
 import axiosInstance from "@utils/axious";
 import { api } from "@utils/api";
 import { Wrapper } from "./Login.style";
+import toast from "react-hot-toast";
 
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const { t } = useTranslation();
-  const [authType, setAuthType] = useState("user");
+  const [auth, setAuth] = useState("user");
+  const { setAuthType } = useECommerce();
   const navigate = useNavigate();
 
   const handleChange = () => {
-    setAuthType((prevType) => (prevType === "user" ? "admin" : "user"));
+    setAuth((prevType) => (prevType === "user" ? "admin" : "user"));
   };
 
   const handleClickShowPassword = () => setShowPassword((show) => !show);
@@ -55,17 +58,22 @@ const Login = () => {
           },
         }
       );
+
       if (result.status === 200) {
         localStorage.setItem(
           "auth",
-          JSON.stringify({ ...result.data, authType })
+          JSON.stringify({ ...result.data, authType: auth })
         );
-        authType === "admin"
+        setAuthType(auth);
+        auth !== "admin"
           ? navigate("/product", { replace: "true" })
           : navigate("/dashboard", { replace: "true" });
       }
     } catch (error) {
       console.error(error);
+      toast.error(error.response.data, {
+        id: "loginError",
+      });
     }
   };
 

@@ -5,6 +5,7 @@ import AddIcon from "@mui/icons-material/Add";
 import axiosInstance from "@utils/axious";
 import { api } from "@utils/api";
 import { ModalContent, Textarea } from "./AddProduct.style";
+import toast from "react-hot-toast";
 
 const AddProduct = () => {
   const { t } = useTranslation();
@@ -31,8 +32,12 @@ const AddProduct = () => {
     try {
       const result = await axiosInstance.post(`${api.addProduct}`, payload);
       console.log(result.data, result.status);
+      toast.success("Product added.");
     } catch (error) {
       console.error(error);
+      toast.error(error.response.data, {
+        id: "product-added",
+      });
     }
     handleClose();
   };

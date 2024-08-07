@@ -1,5 +1,6 @@
 import { Suspense, useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
+import { Toaster } from "react-hot-toast";
 import Layout from "@components/Layout/Layout";
 import Loader from "@components/Loader/Loader";
 import { dashboardRoutes, protectedRoutes, publicRoutes } from "./routes";
@@ -67,6 +68,9 @@ const App = () => {
 
   return (
     <>
+      <div>
+        <Toaster />
+      </div>
       <AddToHome />
       <Suspense fallback={<Loader />}>
         <Routes>

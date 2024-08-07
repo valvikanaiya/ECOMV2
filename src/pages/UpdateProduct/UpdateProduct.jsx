@@ -6,6 +6,7 @@ import { api } from "@utils/api";
 import axiosInstance from "@utils/axious";
 import { Textarea } from "@components/AddProduct/AddProduct.style";
 import { useTranslation } from "react-i18next";
+import toast from "react-hot-toast";
 
 const UpdateProduct = () => {
   const [product, setProduct] = useState();
@@ -43,9 +44,13 @@ const UpdateProduct = () => {
     try {
       const result = await axiosInstance.put(`${api.products}/${id}`, data);
       console.log(result.data);
-      navigate(`/dashboard/products/${id}`,{replace:true});
+      toast.success("Product updated successfully.", { id: "update-product" });
+      navigate(`/dashboard/products/${id}`, { replace: true });
     } catch (error) {
       console.error(error);
+      toast.error(error.response.data, {
+        id: "update-product-error",
+      });
     }
   };
 

@@ -17,6 +17,7 @@ import { ModalContent } from "../AddProduct/AddProduct.style";
 import { QuantityArray } from "@utils/utils";
 import axiosInstance from "@utils/axious";
 import { api } from "@utils/api";
+import toast from "react-hot-toast";
 
 const ProductAction = ({
   product,
@@ -42,6 +43,7 @@ const ProductAction = ({
         `${api.products}/${product.id}`
       );
       console.log(result.data);
+      toast("Product Deleted.", { id: "delete-product", icon: "🗑️" });
     } catch (error) {
       console.error(error);
     }
